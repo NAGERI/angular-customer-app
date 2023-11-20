@@ -1,0 +1,38 @@
+<nav
+  class="navbar navbar-expand-lg py-md-10 navbar-light"
+  style="background-color: #bcd8e5"
+>
+  <a class="navbar-brand" href="/dashboard">CompuLynx</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav 0" style="justify-content: safe">
+      <li>Customer Balance {{ customer_balance }}</li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

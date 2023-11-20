@@ -1,0 +1,95 @@
+<!-- <div class="container">
+  <div class="row login-page">
+    <div class="loginClass col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+      <img
+        src="../../../assets/user_149071.png"
+        class="user-avatar"
+        alt="https://www.freepik.com/icon/user_149071"
+      />
+      <h1>Bootdey.com</h1>
+      <form role="form" class="ng-pristine ng-valid">
+        <div class="form-content">
+          <div class="form-group">
+            <span>
+              <i class="fa-solid fa-envelope"></i>
+              <input
+                type="text"
+                class="form-control input-underline input-lg"
+                placeholder="Email"
+              />
+            </span>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control input-underline input-lg"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+        <button class="btn btn-info btn-lg">Log in</button> &nbsp;
+        <button type="submit" class="btn btn-info btn-lg">Register</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="pannel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">{{ title }} Login</h3>
+          </div>
+          <div>
+            <div class="panel-body p-3">
+              <form (ngSubmit)="onLoginSubmit()">
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-user p-2"></span>
+                    <input
+                      type="text"
+                      name="customer_id"
+                      [(ngModel)]="loginObj.customer_id"
+                      placeholder="Customer ID"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-lock p-2"></span>
+                    <input
+                      [type]="type"
+                      name="customer_pin"
+                      [(ngModel)]="loginObj.customer_pin"
+                      placeholder="PIN"
+                    />
+                    <span
+                      (click)="hideshowPass()"
+                      class="fa {{ eyeIcon }}"
+                    ></span>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block mt-4 w-100"
+                >
+                  Login
+                </button>
+                <div class="text-center pt-4 text-muted">
+                  Don't have account?
+                  <a id="regist" routerLink="/registration">Register</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div><a routerLink="/registration">login</a></div> -->
+
+<!-- <i class="fa-solid fa-user"></i><i class="fa-solid fa-lock-keyhole"></i> -->

@@ -1,0 +1,281 @@
+<div class="container-fluid" id="main-container">
+  <div>
+    <div>
+      <div class="row justify-content-between">
+        <div class="col-2 mt-3">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onOpenModal('deposit')"
+          >
+            Deposit
+          </button>
+        </div>
+        <div class="col-2 mt-3">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onOpenModal('withdraw')"
+          >
+            Withdraw
+          </button>
+        </div>
+        <div class="col-2 mt-3">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onOpenModal('transfer')"
+          >
+            Transfer
+          </button>
+        </div>
+
+        <form class="col-6 mt-3">
+          <div class="mb-3 row" style="justify-content: flex-end">
+            <label
+              for="table-filtering-search"
+              class="col-xs-3 col-sm-auto col-form-label"
+              >Search By Transaction ID:</label
+            >
+            <div class="col-xs-3 col-sm-auto">
+              <input
+                id="table-filtering-search"
+                class="form-control"
+                type="text"
+                name="search"
+                placeholder="Search..."
+                [(ngModel)]="searchText"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped pt-10">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Transaction ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let transaction of transactions | search : searchText;
+          index as i
+        "
+      >
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ transaction.transaction_id }}</td>
+        <td>{{ transaction.transactionDate }}</td>
+        <td>{{ transaction.transactionAmount.toLocaleString() }}</td>
+        <td>{{ transaction.transactionType }}</td>
+      </tr>
+
+      <tr *ngIf="transactions.length == 0">
+        <td colspan="5" style="text-align: center">No Transactions found!</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Deposit Modal -->
+  <div
+    class="modal fade"
+    id="depositModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="depositModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="depositModalLabel">
+            Deposit - Enter Amount
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #depositForm="ngForm" (ngSubmit)="onDeposit(depositForm)">
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input
+                type="number"
+                ngModel
+                name="amount"
+                class="form-control"
+                id="amount"
+                placeholder="Depsit Amount ($)"
+                required
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                id="add-customer-form"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                [disabled]="depositForm.invalid"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Deposit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Withdraw Modal -->
+  <div
+    class="modal fade"
+    id="withdrawModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="withdrawModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="withdrawModalLabel">
+            Withdraw - Enter Amount
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #withdrawForm="ngForm" (ngSubmit)="onWithdraw(withdrawForm)">
+            <div class="form-group">
+              <label for="amount">Withdraw Amount</label>
+              <input
+                type="number"
+                ngModel
+                name="amount"
+                class="form-control"
+                id="amount"
+                placeholder="Withdraw Amount ($)"
+                required
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                id="withdraw-close"
+                data-dismiss="modal"
+                class="btn btn-secondary"
+              >
+                Close
+              </button>
+              <button
+                [disabled]="withdrawForm.invalid"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Withdraw
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transfer Modal -->
+  <div
+    class="modal fade"
+    id="transferModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="deleteModelLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModelLabel">
+            Transfer To Another Account
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #transferForm="ngForm" (ngSubmit)="onTransfer(transferForm)">
+            <div class="form-group">
+              <label for="fromAccountId">Account ID (From)</label>
+              <input
+                type="number"
+                ngModel
+                name="fromAccountId"
+                class="form-control"
+                id="fromAccountId"
+                placeholder="Account ID"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="amount">Transfer Amount</label>
+              <input
+                type="number"
+                ngModel
+                name="amount"
+                class="form-control"
+                id="amount"
+                placeholder="Transfer Amount ($)"
+                required
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                [disabled]="transferForm.invalid"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Transfer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

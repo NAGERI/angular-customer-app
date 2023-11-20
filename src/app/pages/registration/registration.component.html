@@ -1,0 +1,92 @@
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="pannel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">{{ title }} Register</h3>
+          </div>
+          <div>
+            <div class="panel-body p-3">
+              <form #registerForm="ngForm" (ngSubmit)="onRegisterSubmit()">
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-user p-2"></span>
+                    <input
+                      type="text"
+                      name="firstName"
+                      [(ngModel)]="registerData.firstName"
+                      placeholder="First Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-user p-2"></span>
+                    <input
+                      type="text"
+                      name="lastName"
+                      [(ngModel)]="registerData.lastName"
+                      placeholder="Last Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-user p-2"></span>
+                    <input
+                      type="text"
+                      name="email"
+                      [(ngModel)]="registerData.email"
+                      placeholder="Email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-user p-2"></span>
+                    <input
+                      type="text"
+                      required
+                      name="customer-id"
+                      [(ngModel)]="registerData.customerId"
+                      placeholder="Customer ID"
+                    />
+                  </div>
+                </div>
+                <!-- 
+                <div class="form-group pt-3">
+                  <div class="input-field">
+                    <span class="fa-solid fa-lock p-2"></span>
+                    <input [type]="type" placeholder="Password" />
+                    <span
+                      (click)="hideshowPass()"
+                      class="fa {{ eyeIcon }}"
+                    ></span>
+                  </div>
+                </div> -->
+                <button
+                  type="submit"
+                  [disabled]="registerForm.invalid"
+                  class="btn btn-primary btn-block mt-4 w-100"
+                >
+                  Register
+                </button>
+                <div class="text-center pt-4 text-muted">
+                  Already have account?
+                  <a id="regist" routerLink="/login">Login</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div><a routerLink="/registration">login</a></div> -->
+
+<!-- <i class="fa-solid fa-user"></i><i class="fa-solid fa-lock-keyhole"></i> -->
