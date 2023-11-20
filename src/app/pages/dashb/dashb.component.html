@@ -73,7 +73,7 @@
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ transaction.transaction_id }}</td>
         <td>{{ transaction.transactionDate }}</td>
-        <td>{{ transaction.transactionAmount.toLocaleString() }}</td>
+        <td>{{ transaction.transactionAmount }}</td>
         <td>{{ transaction.transactionType }}</td>
       </tr>
 
@@ -207,6 +207,10 @@
   </div>
 
   <!-- Transfer Modal -->
+  <!-- <span *ngFor="let item of accountData$ | interatePipe">
+    Key: {{ item.id }}, Value: {{ item.accountNumber }}
+  </span> -->
+
   <div
     class="modal fade"
     id="transferModal"
@@ -279,3 +283,8 @@
     </div>
   </div>
 </div>
+<footer class="fixed-bottom" style="justify-content: flex-start">
+  <div class="container-fluid">
+    <span class="text-muted">Account Number : {{ accountNumber }}</span>
+  </div>
+</footer>

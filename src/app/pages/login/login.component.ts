@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  title: String = 'Compulynx ';
+  title: String = 'Customer';
   loginObj: any = {
     customer_id: '',
     customer_pin: '',
@@ -29,16 +29,25 @@ export class LoginComponent {
       customer_pin: this.loginObj.customer_pin,
     };
     this.http
-      .post(`${environment.apiUrl}/auth/login`, this.loginObj)
-      .subscribe((res: any) => {
-        if (res.result) {
-          console.log(res);
-          alert('login Success');
-          localStorage.setItem('loginToken', res.data.token);
-          this.router.navigateByUrl('/dashboard');
-        } else {
-          alert(res.message);
+      .post<any>(`${environment.apiBaseUrl}/auth/login`, this.loginObj)
+      .subscribe(
+        (res) => {
+          console.log(res.token);
+          if (res) {
+            this.router.navigate(['/dashboard']);
+            localStorage.clear();
+            localStorage.setItem('id', res.token);
+            // alert('login Success');
+          } else {
+            console.log(res);
+            alert('Login failed. Please Try Again.');
+          }
+        },
+        (error) => {
+          // Handle error from the HTTP request
+          console.error('Error during Login:', error);
+          alert('Login failed. Please Try Again.');
         }
-      });
+      );
   }
 }

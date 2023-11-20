@@ -18,7 +18,7 @@ export class RegistrationComponent {
   };
   registerData = { firstName: '', lastName: '', email: '', customerId: '' };
   regData: any = {};
-  title: String = 'Compulynx';
+  title: String = 'Customer';
 
   constructor(private router: Router, private registerService: DataService) {}
   onRegisterSubmit() {

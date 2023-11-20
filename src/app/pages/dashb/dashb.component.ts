@@ -28,29 +28,23 @@ export class DashbComponent implements OnInit {
       transactionType: 'Withdraw',
     },
     {
-      id: 1,
+      id: 2,
       account: [],
       transaction_id: '2343-2434-1232-9941',
       transactionDate: '01/02/2020',
       transactionAmount: 18985200,
       transactionType: 'Withdraw',
     },
-    {
-      id: 1,
-      account: [],
-      transaction_id: '2343-2434-1232-9941',
-      transactionDate: '01/02/2020',
-      transactionAmount: 18985200,
-      transactionType: 'Transfer',
-    },
   ];
 
   searchText: string = '';
+  mapToArray: any;
+  accountNumber: any = 'ACCxxxxxxx';
 
   constructor(private accountService: AccountService) {}
 
   accountData$: any = [];
-  transactions: any = this.TRANSACTIONS.splice(0, 10).reverse();
+  transactions: any = [];
   public transferAccount: any = [];
   public accounts: any;
   public depositAccount: any;
@@ -66,7 +60,8 @@ export class DashbComponent implements OnInit {
     this.accountService.getAccounts(this.id).subscribe(
       (data: any) => {
         this.accountData$ = data;
-        this.transactions = data.transactions;
+        this.transactions = data.transactions.reverse().splice(0, 10);
+        this.accountNumber = data.accountNumber;
       },
       (error) => console.error('Error fetching accounts:', error)
     );
@@ -136,8 +131,7 @@ export class DashbComponent implements OnInit {
           }
           transferForm.reset();
         }
-      )
-      .unsubscribe();
+      );
   }
 
   public onOpenModal(mode: string): void {

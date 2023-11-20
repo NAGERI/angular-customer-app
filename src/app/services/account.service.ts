@@ -44,7 +44,7 @@ export class AccountService {
     amount: any
   ): Observable<any> {
     return this.http.post<any>(
-      `${this.apiServerUrl}/accounts/transfer?fromAccountId=${fromAccountId}&toAccountId=${toAccountId}&amount=${amount}`,
+      `${this.apiServerUrl}/accounts/transfer/${amount}?fromAccountId=${fromAccountId}&toAccountId=${toAccountId}`,
       amount
     );
   }
