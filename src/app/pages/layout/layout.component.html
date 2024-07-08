@@ -22,18 +22,14 @@
           >Home <span class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/registration">Register</a>
-      </li>
     </ul>
-    <ul class="navbar-nav 0" style="justify-content: safe">
-      <li>Customer Balance {{ customer_balance }}</li>
+    <ul class="navbar-nav ml-auto align-items-center">
+      <li class="nav-item mr-3">
+        <span>Customer Balance: {{ customer_balance }}</span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>

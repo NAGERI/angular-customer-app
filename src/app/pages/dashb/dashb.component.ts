@@ -57,39 +57,33 @@ export class DashbComponent implements OnInit {
 
   fetchAccounts() {
     this.id = localStorage.getItem('id');
-    this.accountService.getAccounts(this.id).subscribe(
-      (data: any) => {
+    this.accountService.getAccounts(this.id).subscribe({
+      next: (data: any) => {
         this.accountData$ = data;
         this.transactions = data.transactions.reverse().splice(0, 10);
         this.accountNumber = data.accountNumber;
       },
-      (error) => console.error('Error fetching accounts:', error)
-    );
+      error: (error) => console.error('Error fetching accounts:', error),
+    });
   }
 
   public onDeposit(depositForm: NgForm): void {
-    console.log(
-      'Deposit Clicked',
-      depositForm.value,
-      'Depositing on : ',
-      this.id
-    );
     this.id = localStorage.getItem('id');
     this.accountService
       .depositOnAccount(this.id, depositForm.value.amount)
-      .subscribe(
-        (response: any) => {
+      .subscribe({
+        next: (response: any) => {
           console.log(response);
           depositForm.reset();
           window.location.reload();
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           if (error.status > 300) {
             alert('Deposit Operation Failed');
           }
           depositForm.reset();
-        }
-      );
+        },
+      });
   }
 
   public onWithdraw(withdrawForm: NgForm): void {
@@ -111,6 +105,7 @@ export class DashbComponent implements OnInit {
       );
   }
 
+  // Transfer from another account to logged in one.
   public onTransfer(transferForm: NgForm): void {
     console.log('Transfer Clicked', transferForm.value);
     this.id = localStorage.getItem('id');
@@ -120,18 +115,18 @@ export class DashbComponent implements OnInit {
         this.id,
         transferForm.value.amount
       )
-      .subscribe(
-        (response: void) => {
+      .subscribe({
+        next: (response: void) => {
           console.log(response);
           transferForm.reset();
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           if (error.status > 300) {
             alert('Transfer Operation Failed');
           }
           transferForm.reset();
-        }
-      );
+        },
+      });
   }
 
   public onOpenModal(mode: string): void {

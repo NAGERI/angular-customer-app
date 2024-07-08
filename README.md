@@ -1,12 +1,22 @@
-# Angular Customer FrontEnd App
+# Customer Client
 
-## Notes
+This is a client for a server application found at [Client Server]()
 
-Register for a customer to be created.
+- Clone the project using `git` command below:
 
-An account is created when a customer is registered on the `http://localhost:4200/registration`.
+  ```git
+  git clone https://github.com/NAGERI/customer_client.git .
+  ```
 
-Install node modules using `npm install` command. Ensure you have npm v10.1.0 and node v20.9.0 installed.
+  This wil clone it to your current directory.
+
+- Install node modules using `npm install` command.
+- Ensure you have npm version 10.1.0 and node version 20.9.0 or higher already installed.
+
+- Run the application using:
+  ```
+  npm start
+  ```
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
 

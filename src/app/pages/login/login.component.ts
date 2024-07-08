@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class LoginComponent {
   title: String = 'Customer';
-  loginObj: any = {
+  loginForm: any = {
     customer_id: '',
     customer_pin: '',
   };
@@ -24,30 +24,23 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   onLoginSubmit() {
-    this.loginObj = {
-      customer_id: this.loginObj.customer_id,
-      customer_pin: this.loginObj.customer_pin,
+    this.loginForm = {
+      customer_id: this.loginForm.customer_id,
+      customer_pin: this.loginForm.customer_pin,
     };
     this.http
-      .post<any>(`${environment.apiBaseUrl}/auth/login`, this.loginObj)
-      .subscribe(
-        (res) => {
-          console.log(res.token);
-          if (res) {
-            this.router.navigate(['/dashboard']);
-            localStorage.clear();
-            localStorage.setItem('id', res.token);
-            // alert('login Success');
-          } else {
-            console.log(res);
-            alert('Login failed. Please Try Again.');
-          }
+      .post<any>(`${environment.apiBaseUrl}/auth/login`, this.loginForm)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          localStorage.setItem('id', response.token);
+          this.router.navigate(['/dashboard']);
+          // alert('login Success');
         },
-        (error) => {
-          // Handle error from the HTTP request
-          console.error('Error during Login:', error);
+        error: (error) => {
+          console.log(error);
           alert('Login failed. Please Try Again.');
-        }
-      );
+        },
+      });
   }
 }

@@ -1,44 +1,69 @@
-<!-- <div class="container">
-  <div class="row login-page">
-    <div class="loginClass col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
-      <img
-        src="../../../assets/user_149071.png"
-        class="user-avatar"
-        alt="https://www.freepik.com/icon/user_149071"
-      />
-      <h1>Bootdey.com</h1>
-      <form role="form" class="ng-pristine ng-valid">
-        <div class="form-content">
-          <div class="form-group">
-            <span>
-              <i class="fa-solid fa-envelope"></i>
+<!-- <div
+  class="container d-flex align-items-center justify-content-center min-vh-100"
+>
+  <div class="row justify-content-center w-100">
+    <div class="col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Login</h3>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <label for="email">Email address</label>
               <input
-                type="text"
-                class="form-control input-underline input-lg"
-                placeholder="Email"
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Enter email"
               />
-            </span>
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              class="form-control input-underline input-lg"
-              placeholder="Password"
-            />
-          </div>
+              <div
+                ngIf="
+                  loginForm.get('email').invalid &&
+                  loginForm.get('email').touched
+                "
+                class="text-danger"
+              >
+                Email is required and must be valid.
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Password"
+              />
+              <div
+                ngIf="
+                  loginForm.get('password').invalid &&
+                  loginForm.get('password').touched
+                "
+                class="text-danger"
+              >
+                Password is required.
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+              [disabled]="loginForm.invalid"
+            >
+              Login
+            </button>
+          </form>
         </div>
-        <button class="btn btn-info btn-lg">Log in</button> &nbsp;
-        <button type="submit" class="btn btn-info btn-lg">Register</button>
-      </form>
+      </div>
     </div>
   </div>
 </div> -->
 
 <div class="outer">
-  <div class="container">
-    <div class="row">
+  <div class="container justify-content-center">
+    <div class="row w-100">
       <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
-        <div class="pannel border bg-white">
+        <div class="panel border bg-white">
           <div class="panel-heading">
             <h3 class="pt-3 font-weight-bold">{{ title }} Login</h3>
           </div>
@@ -51,7 +76,7 @@
                     <input
                       type="text"
                       name="customer_id"
-                      [(ngModel)]="loginObj.customer_id"
+                      [(ngModel)]="loginForm.customer_id"
                       placeholder="Customer ID"
                     />
                   </div>
@@ -63,7 +88,7 @@
                     <input
                       [type]="type"
                       name="customer_pin"
-                      [(ngModel)]="loginObj.customer_pin"
+                      [(ngModel)]="loginForm.customer_pin"
                       placeholder="PIN"
                     />
                     <span
@@ -90,6 +115,3 @@
     </div>
   </div>
 </div>
-<!-- <div><a routerLink="/registration">login</a></div> -->
-
-<!-- <i class="fa-solid fa-user"></i><i class="fa-solid fa-lock-keyhole"></i> -->

@@ -18,15 +18,15 @@ export class LayoutComponent implements OnInit {
 
   fetchAccounts() {
     this.id = localStorage.getItem('id');
-    this.accountService.balanceOnAccount(this.id).subscribe(
-      (data: any) => {
+    this.accountService.balanceOnAccount(this.id).subscribe({
+      next: (data: any) => {
         this.customer_balance = data;
         console.log(this.customer_balance);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching account details:', error);
         localStorage.clear();
-      }
-    );
+      },
+    });
   }
 }

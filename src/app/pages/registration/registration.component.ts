@@ -28,8 +28,8 @@ export class RegistrationComponent {
       name: this.registerData.firstName + ' ' + this.registerData.lastName,
     });
 
-    this.registerService.register(reg).subscribe(
-      (response: any) => {
+    this.registerService.register(reg).subscribe({
+      next: (response: any) => {
         console.log('Register response', response);
         if (response) {
           this.router.navigate(['/dashboard']);
@@ -52,11 +52,11 @@ export class RegistrationComponent {
           alert('Registration failed. Please Try Again.');
         }
       },
-      (error) => {
+      error: (error) => {
         // Handle error from the HTTP request
         console.error('Error during Registration:', error);
         alert('Registration failed. Please Try Again.');
-      }
-    );
+      },
+    });
   }
 }
